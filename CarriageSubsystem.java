@@ -6,10 +6,9 @@ package frc.robot.subsystems.Carriage;
 
 import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.Carriage.CarriageIOInputsAutoLogged;
 
 public class CarriageSubsystem extends SubsystemBase {
-  
+
   CarriageIO io;
   CarriageIOInputsAutoLogged inputs = new CarriageIOInputsAutoLogged();
 
@@ -21,25 +20,24 @@ public class CarriageSubsystem extends SubsystemBase {
     instance = this;
   }
 
-public static CarriageSubsystem getInstance() {
+  public static CarriageSubsystem getInstance() {
     if (instance == null) {
       instance = new CarriageSubsystem(new CarriageIOSim());
     }
     return instance;
   }
 
-  
   public void setRPM(double rPM) {
     io.setCarriageRPM(rPM);
   }
 
-  public void settoZero() {
-    io.settoZero();;
+  public void setToZero() {
+    io.setToZero();
   }
 
   @Override
   public void periodic() {
-    
+
     io.processInputs(inputs);
     Logger.processInputs("Carriage", inputs);
   }

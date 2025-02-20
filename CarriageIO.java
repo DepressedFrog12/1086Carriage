@@ -2,7 +2,6 @@ package frc.robot.subsystems.Carriage;
 
 import org.littletonrobotics.junction.AutoLog;
 
-
 public interface CarriageIO {
 
     @AutoLog
@@ -25,11 +24,7 @@ public interface CarriageIO {
 
     public abstract void processInputs(final CarriageIOInputsAutoLogged inputs);
 
-    public abstract void setCarriageVolts(double volts);
-
     public abstract void setCarriageRPM(double rPM);
 
-    public abstract void settoZero();
-
-    public abstract void setCarriagePID(double kP, double kI, double kD);
+    public abstract void setToZero();
 }

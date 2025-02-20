@@ -3,8 +3,9 @@ package frc.robot.subsystems.Carriage;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.Constants;
-import frc.robot.subsystems.Carriage.CarriageIOInputsAutoLogged;
 
 public class CarriageIOTalonSRX implements CarriageIO {
     private final TalonSRX carriage = new TalonSRX(Constants.CarriageConstants.CARRIAGE_MOTOR_ID);
@@ -26,22 +27,13 @@ public class CarriageIOTalonSRX implements CarriageIO {
     }
 
     @Override
-    public void setCarriageVolts(double volts) {
-        carriage.set(ControlMode.PercentOutput, volts);
+    public void setCarriageRPM(double maxPercent) {
+        carriage.set(ControlMode.PercentOutput, MathUtil.clamp(maxPercent / RobotController.getInputVoltage(), -1, 1));
     }
 
     @Override
-    public void setCarriageRPM(double rPM) {
-        carriage.set(ControlMode.PercentOutput, rPM);
-    }
-
-    @Override
-    public void settoZero() {
+    public void setToZero() {
         carriage.set(ControlMode.PercentOutput, 0);
     }
 
-    @Override
-    public void setCarriagePID(double kP, double kI, double kD) {
-        
-    }
 }

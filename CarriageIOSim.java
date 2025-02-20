@@ -1,13 +1,11 @@
 package frc.robot.subsystems.Carriage;
 
-
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
-import frc.robot.Constants;
-import frc.robot.subsystems.Carriage.CarriageIOInputsAutoLogged;
 
-public class CarriageIOSim implements CarriageIO{
+public class CarriageIOSim implements CarriageIO {
 	private DCMotorSim carriageMotorSim;
 
 	public CarriageIOSim() {
@@ -24,24 +22,13 @@ public class CarriageIOSim implements CarriageIO{
 	}
 
 	@Override
-	public void setCarriageVolts(double volts) {
-		carriageMotorSim.setInputVoltage(volts);
-	}
-
-	@Override
 	public void setCarriageRPM(double rpm) {
 		System.out.println(rpm);
-		carriageMotorSim.setInput(rpm);
+		carriageMotorSim.setAngularVelocity(Units.rotationsPerMinuteToRadiansPerSecond(rpm));
 	}
 
 	@Override
-	public void setCarriagePID(double kP, double kI, double kD) {
-		
-	}
-
-	@Override
-	public void settoZero() {
-		carriageMotorSim.setAngularVelocity(0);
+	public void setToZero() {
 		carriageMotorSim.setInput(0);
 	}
 }
