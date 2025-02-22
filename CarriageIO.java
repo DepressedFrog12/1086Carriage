@@ -7,24 +7,13 @@ public interface CarriageIO {
     @AutoLog
     public class CarriageIOInputs {
         public double carriageRPM = 0.0;
-
-        public double targetRPM = 0.0;
-
-        public double carriageAmps = 0.0;
-
-        public double carriagesVolts = 0.0;
-
-        public double carriagekP = 0.0;
-        public double carriagekI = 0.0;
-        public double carriagekD = 0.0;
-
         public double carriageTemp = 0.0;
 
     }
 
-    public abstract void processInputs(final CarriageIOInputsAutoLogged inputs);
+    public abstract void processInputs(final CarriageIOInputs inputs);
 
-    public abstract void setCarriageRPM(double rPM);
+    public abstract void setCarriagePercent(double maxPercent);
 
     public abstract void setToZero();
 }

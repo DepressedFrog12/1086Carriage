@@ -27,8 +27,8 @@ public class CarriageSubsystem extends SubsystemBase {
     return instance;
   }
 
-  public void setRPM(double rPM) {
-    io.setCarriageRPM(rPM);
+  public void setRPM(double maxPercent) {
+    io.setCarriagePercent(maxPercent);
   }
 
   public void setToZero() {

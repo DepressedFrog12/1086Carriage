@@ -25,15 +25,13 @@ public class CarriageIOSparkMax implements CarriageIO {
     }
 
     @Override
-    public void processInputs(CarriageIOInputsAutoLogged inputs) {
+    public void processInputs(CarriageIOInputs inputs) {
         inputs.carriageRPM = carriage.getEncoder().getVelocity();
-        inputs.carriageAmps = carriage.getOutputCurrent();
-        inputs.carriagesVolts = carriage.getAppliedOutput() * carriage.getBusVoltage();
         inputs.carriageTemp = carriage.getMotorTemperature();
     }
 
     @Override
-    public void setCarriageRPM(double maxPercent) {
+    public void setCarriagePercent(double maxPercent) {
         carriage.set(maxPercent);
     }
 

@@ -17,17 +17,15 @@ public class CarriageIOTalonSRX implements CarriageIO {
     }
 
     @Override
-    public void processInputs(CarriageIOInputsAutoLogged inputs) {
+    public void processInputs(CarriageIOInputs inputs) {
 
         inputs.carriageRPM = carriage.getSelectedSensorVelocity();
-        inputs.carriagesVolts = carriage.getMotorOutputVoltage();
-        inputs.carriageAmps = carriage.getSupplyCurrent();
         inputs.carriageTemp = carriage.getTemperature();
 
     }
 
     @Override
-    public void setCarriageRPM(double maxPercent) {
+    public void setCarriagePercent(double maxPercent) {
         carriage.set(ControlMode.PercentOutput, MathUtil.clamp(maxPercent / RobotController.getInputVoltage(), -1, 1));
     }
 

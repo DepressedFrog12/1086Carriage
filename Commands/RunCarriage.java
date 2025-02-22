@@ -10,14 +10,11 @@ import frc.robot.subsystems.Carriage.CarriageSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class RunCarriage extends Command {
   private CarriageSubsystem carriage;
-  private double RPM;
-  private boolean direction;
-
+  private double maxPercent;
   /** Creates a new RunCarriage. */
-  public RunCarriage(boolean direction, double RPM) {
+  public RunCarriage(double maxPercent) {
     carriage = CarriageSubsystem.getInstance();
-    this.RPM = RPM;
-    this.direction = direction;
+    this.maxPercent = maxPercent;
     addRequirements(carriage);
   }
 
@@ -29,11 +26,7 @@ public class RunCarriage extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (direction) {
-      carriage.setRPM(RPM);
-    } else {
-      carriage.setRPM(-RPM);
-    }
+      carriage.setRPM(maxPercent);
   }
 
   // Called once the command ends or is interrupted.

@@ -14,17 +14,16 @@ public class CarriageIOSim implements CarriageIO {
 	}
 
 	@Override
-	public void processInputs(CarriageIOInputsAutoLogged inputs) {
+	public void processInputs(CarriageIOInputs inputs) {
 		carriageMotorSim.update(0.02);
 
 		inputs.carriageRPM = carriageMotorSim.getAngularVelocityRPM();
-		inputs.carriagesVolts = carriageMotorSim.getInputVoltage();
 	}
 
 	@Override
-	public void setCarriageRPM(double rpm) {
-		System.out.println(rpm);
-		carriageMotorSim.setAngularVelocity(Units.rotationsPerMinuteToRadiansPerSecond(rpm));
+	public void setCarriagePercent(double maxPercent) {
+		System.out.println(maxPercent);
+		carriageMotorSim.setAngularVelocity(Units.rotationsPerMinuteToRadiansPerSecond(maxPercent));
 	}
 
 	@Override
