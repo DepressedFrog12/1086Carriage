@@ -26,7 +26,7 @@ This will create an enum for configuring between motors. When using a SparkMax, 
 ```
 5. In your RobotContainer.java file's `configureBindings()` method, write lines similar to:
 ```
-    driverController.b().whileTrue(new RunCarriage(true, CarriageConstants.maxPercent));
-    driverController.y().whileTrue(new RunCarriage(false, CarriageConstants.maxPercent));
+    driverController.b().whileTrue(new RunCarriage(CarriageConstants.maxPercent));
+    driverController.y().whileTrue(new RunCarriage(-CarriageConstants.maxPercent));
 ```
 with `driverController` replaced with your controller variable, and `.b()` or `.y()` replaced with your choice of bindings. Change true and false for whichever direction it needs to go. This can be configured for both directions as shown. Import `CarriageConstants` when required.
