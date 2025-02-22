@@ -1,4 +1,4 @@
-package frc.robot.subsystems.Carriage;
+package frc.robot.subsystems.carriage;
 
 import org.littletonrobotics.junction.AutoLog;
 

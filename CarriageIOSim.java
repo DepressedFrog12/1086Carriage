@@ -1,4 +1,4 @@
-package frc.robot.subsystems.Carriage;
+package frc.robot.subsystems.carriage;
 
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;

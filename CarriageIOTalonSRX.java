@@ -1,4 +1,4 @@
-package frc.robot.subsystems.Carriage;
+package frc.robot.subsystems.carriage;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
