@@ -39,6 +39,6 @@ public class CarriageSubsystem extends SubsystemBase {
   public void periodic() {
 
     io.processInputs(inputs);
-    Logger.processInputs("Carriage", inputs);
+    Logger.processInputs("/Subsystems/Carriage", inputs);
   }
 }
