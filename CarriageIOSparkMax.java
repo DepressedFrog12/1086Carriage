@@ -5,16 +5,17 @@
 package frc.robot.subsystems.carriage;
 
 import com.revrobotics.spark.SparkMax;
+import com.reduxrobotics.sensors.canandcolor.Canandcolor;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import frc.robot.Constants;
+import frc.robot.Constants.RobotMap;
 
 /** Add your docs here. */
 public class CarriageIOSparkMax implements CarriageIO {
-    private final SparkMax carriage = new SparkMax(Constants.CarriageConstants.CARRIAGE_MOTOR_ID,
-            SparkMax.MotorType.kBrushless);
+    private final SparkMax carriage = new SparkMax(RobotMap.CARRIAGE_MOTOR_ID, SparkMax.MotorType.kBrushless);
+    private final Canandcolor sensor = new Canandcolor(RobotMap.CARRIAGE_CANANDCOLOR_ID);
 
     public CarriageIOSparkMax() {
         SparkMaxConfig config = new SparkMaxConfig();
@@ -31,13 +32,12 @@ public class CarriageIOSparkMax implements CarriageIO {
     }
 
     @Override
-    public void setCarriagePercent(double maxPercent) {
-        carriage.set(maxPercent);
+    public void setCarriagePercent(double percent) {
+        carriage.set(percent);
     }
 
     @Override
-    public void setToZero() {
-        carriage.set(0);
+    public double getProximity() {
+        return sensor.getProximity();
     }
-
 }

@@ -2,15 +2,14 @@ package frc.robot.subsystems.carriage;
 
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
 public class CarriageIOSim implements CarriageIO {
 	private DCMotorSim carriageMotorSim;
 
 	public CarriageIOSim() {
-		carriageMotorSim = new DCMotorSim(LinearSystemId.createDCMotorSystem(0.02, 0.02), DCMotor.getNEO(1));
-
+		carriageMotorSim = new DCMotorSim(LinearSystemId.createDCMotorSystem(DCMotor.getNEO(1), 0.02, 1), DCMotor.getNEO(1));
 	}
 
 	@Override
@@ -21,13 +20,12 @@ public class CarriageIOSim implements CarriageIO {
 	}
 
 	@Override
-	public void setCarriagePercent(double maxPercent) {
-		System.out.println(maxPercent);
-		carriageMotorSim.setAngularVelocity(Units.rotationsPerMinuteToRadiansPerSecond(maxPercent));
+	public void setCarriagePercent(double percent) {
+		carriageMotorSim.setInputVoltage(percent * RobotController.getInputVoltage());
 	}
 
 	@Override
-	public void setToZero() {
-		carriageMotorSim.setInput(0);
+	public double getProximity() {
+		return 0;
 	}
 }

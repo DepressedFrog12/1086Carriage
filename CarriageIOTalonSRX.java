@@ -2,26 +2,23 @@ package frc.robot.subsystems.carriage;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
+import com.reduxrobotics.sensors.canandcolor.Canandcolor;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.RobotController;
-import frc.robot.Constants;
+import frc.robot.Constants.RobotMap;
 
 public class CarriageIOTalonSRX implements CarriageIO {
-    private final TalonSRX carriage = new TalonSRX(Constants.CarriageConstants.CARRIAGE_MOTOR_ID);
+    private final TalonSRX carriage = new TalonSRX(RobotMap.CARRIAGE_MOTOR_ID);
+    private final Canandcolor sensor = new Canandcolor(RobotMap.CARRIAGE_CANANDCOLOR_ID);
 
     public CarriageIOTalonSRX() {
         carriage.configFactoryDefault();
-
         carriage.setInverted(true);
     }
 
     @Override
     public void processInputs(CarriageIOInputs inputs) {
-
-        inputs.carriageRPM = carriage.getSelectedSensorVelocity();
         inputs.carriageTemp = carriage.getTemperature();
-
     }
 
     @Override
@@ -30,8 +27,7 @@ public class CarriageIOTalonSRX implements CarriageIO {
     }
 
     @Override
-    public void setToZero() {
-        carriage.set(ControlMode.PercentOutput, 0);
+    public double getProximity() {
+        return sensor.getProximity();
     }
-
 }
