@@ -5,39 +5,40 @@
 package frc.robot.subsystems.carriage.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.carriage.CarriageSubsystem;
+import frc.robot.subsystems.carriage.Carriage;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class RunCarriage extends Command {
-  private CarriageSubsystem carriage;
-  private double maxPercent;
-  /** Creates a new RunCarriage. */
-  public RunCarriage(double maxPercent) {
-    carriage = CarriageSubsystem.getInstance();
-    this.maxPercent = maxPercent;
-    addRequirements(carriage);
-  }
+    private Carriage carriage;
+    private double percent;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+    /** Creates a new RunCarriage. */
+    public RunCarriage(double percent) {
+        carriage = Carriage.getInstance();
+        this.percent = percent;
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-      carriage.setRPM(maxPercent);
-  }
+        addRequirements(carriage);
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    carriage.setToZero();
-  }
+    /** Called when the command is initially scheduled. */
+    @Override
+    public void initialize() {}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    /** Called every time the scheduler runs while the command is scheduled. */
+    @Override
+    public void execute() {
+        carriage.setPercent(percent);
+    }
+
+    /** Returns true when the command should end. */
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    /** Called once the command ends or is interrupted. */
+    @Override
+    public void end(boolean interrupted) {
+        carriage.setPercent(0);
+    }
 }
