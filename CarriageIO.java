@@ -21,7 +21,17 @@ public interface CarriageIO {
         public ColorData sensorColor = new ColorData(0,0,0);
     }
 
-    public void processInputs(final CarriageIOInputs inputs);
+    /**
+     * Updates the inputs object with current values.
+     * 
+     * @param inputs The inputs to update.
+     */
+    public void processInputs(CarriageIOInputs inputs);
 
-    public void setCarriagePercent(double maxPercent);
+    /**
+     * Sets the percent output of the carriage.
+     * 
+     * @param percent
+     */
+    public void setCarriagePercent(double percent);
 }

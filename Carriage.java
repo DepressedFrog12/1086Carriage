@@ -27,8 +27,8 @@ public class Carriage extends SubsystemBase {
         instance = this;
     }
 
-    public void setPercent(double maxPercent) {
-        io.setCarriagePercent(maxPercent);
+    public void setPercent(double percent) {
+        io.setCarriagePercent(percent);
     }
 
     @Override

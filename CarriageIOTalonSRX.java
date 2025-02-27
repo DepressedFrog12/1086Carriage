@@ -30,7 +30,7 @@ public class CarriageIOTalonSRX implements CarriageIO {
     }
 
     @Override
-    public void setCarriagePercent(double maxPercent) {
-        carriage.set(ControlMode.PercentOutput, maxPercent);
+    public void setCarriagePercent(double percent) {
+        carriage.set(ControlMode.PercentOutput, percent);
     }
 }
