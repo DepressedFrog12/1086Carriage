@@ -12,14 +12,16 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import frc.robot.Constants.RobotMap;
 
 /** Add your docs here. */
 public class CarriageIOSparkMax implements CarriageIO {
-    private final SparkMax carriage = new SparkMax(RobotMap.CARRIAGE_MOTOR_ID, SparkMax.MotorType.kBrushless);
-    private final Canandcolor sensor = new Canandcolor(RobotMap.CARRIAGE_CANANDCOLOR_ID);
+    private SparkMax carriage;
+    private Canandcolor sensor;
 
-    public CarriageIOSparkMax() {
+    public CarriageIOSparkMax(int motorId, int sensorId) {
+        carriage = new SparkMax(motorId, SparkMax.MotorType.kBrushless);
+        sensor = new Canandcolor(sensorId);
+
         SparkMaxConfig config = new SparkMaxConfig();
         config.inverted(true);
         config.idleMode(IdleMode.kBrake);
