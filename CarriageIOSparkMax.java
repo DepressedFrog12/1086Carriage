@@ -4,8 +4,10 @@
 
 package frc.robot.subsystems.carriage;
 
-import com.revrobotics.spark.SparkMax;
+import static edu.wpi.first.units.Units.*;
+
 import com.reduxrobotics.sensors.canandcolor.Canandcolor;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -27,8 +29,13 @@ public class CarriageIOSparkMax implements CarriageIO {
 
     @Override
     public void processInputs(CarriageIOInputs inputs) {
-        inputs.carriageRPM = carriage.getEncoder().getVelocity();
-        inputs.carriageTemp = carriage.getMotorTemperature();
+        inputs.carriagePercent = carriage.getAppliedOutput();
+        inputs.carriageVoltage = Volts.of(carriage.getAppliedOutput() * carriage.getBusVoltage());
+        inputs.carriageCurrent = Amps.of(carriage.getOutputCurrent());
+        inputs.carriageTemperature = Celsius.of(carriage.getMotorTemperature());
+
+        inputs.sensorProximity = sensor.getProximity();
+        inputs.sensorColor = sensor.getColor();
     }
 
     @Override

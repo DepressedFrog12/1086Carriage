@@ -1,5 +1,7 @@
 package frc.robot.subsystems.carriage;
 
+import static edu.wpi.first.units.Units.*;
+
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.wpilibj.RobotController;
@@ -16,7 +18,9 @@ public class CarriageIOSim implements CarriageIO {
 	public void processInputs(CarriageIOInputs inputs) {
 		carriageMotorSim.update(0.02);
 
-		inputs.carriageRPM = carriageMotorSim.getAngularVelocityRPM();
+		inputs.carriagePercent = carriageMotorSim.getAngularVelocityRadPerSec() / DCMotor.getNEO(1).freeSpeedRadPerSec;
+		inputs.carriageVoltage = Volts.of(carriageMotorSim.getInputVoltage());
+		inputs.carriageCurrent = Amps.of(carriageMotorSim.getCurrentDrawAmps());
 	}
 
 	@Override
