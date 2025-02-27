@@ -42,9 +42,4 @@ public class CarriageIOSparkMax implements CarriageIO {
     public void setCarriagePercent(double percent) {
         carriage.set(percent);
     }
-
-    @Override
-    public double getProximity() {
-        return sensor.getProximity();
-    }
 }

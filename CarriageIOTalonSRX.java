@@ -33,9 +33,4 @@ public class CarriageIOTalonSRX implements CarriageIO {
     public void setCarriagePercent(double maxPercent) {
         carriage.set(ControlMode.PercentOutput, MathUtil.clamp(maxPercent / RobotController.getInputVoltage(), -1, 1));
     }
-    
-    @Override
-    public double getProximity() {
-        return sensor.getProximity();
-    }
 }

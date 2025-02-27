@@ -27,9 +27,4 @@ public class CarriageIOSim implements CarriageIO {
 	public void setCarriagePercent(double percent) {
 		carriageMotorSim.setInputVoltage(percent * RobotController.getInputVoltage());
 	}
-
-	@Override
-	public double getProximity() {
-		return 0;
-	}
 }

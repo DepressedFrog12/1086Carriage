@@ -24,6 +24,4 @@ public interface CarriageIO {
     public void processInputs(final CarriageIOInputs inputs);
 
     public void setCarriagePercent(double maxPercent);
-
-    public double getProximity();
 }
