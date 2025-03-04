@@ -11,20 +11,9 @@ public class Carriage extends SubsystemBase {
     private CarriageIO io;
     private CarriageIOInputsAutoLogged inputs = new CarriageIOInputsAutoLogged();
 
-    private static Carriage instance;
-
-    public static Carriage getInstance() {
-        if (instance == null) {
-            instance = new Carriage(new CarriageIOSim());
-        }
-
-        return instance;
-    }
-
     /** Creates a new CarriageSubsystem. */
     public Carriage(CarriageIO carriageIO) {
         io = carriageIO;
-        instance = this;
     }
 
     public void setPercent(double percent) {
