@@ -13,8 +13,8 @@ public class RunCarriage extends Command {
     private double percent;
 
     /** Creates a new RunCarriage. */
-    public RunCarriage(double percent) {
-        carriage = Carriage.getInstance();
+    public RunCarriage(Carriage carriage, double percent) {
+        this.carriage = carriage;
         this.percent = percent;
 
         addRequirements(carriage);
