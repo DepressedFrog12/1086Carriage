@@ -17,7 +17,7 @@ To make this subsystem function properly,
 2. Pass in the correct CAN ids to the constructors.
 3. In your RobotContainer.java file's `configureBindings()` method, bind buttons to the RunCarriage command like so:
 ```
-    driverController.b().whileTrue(new RunCarriage(speed));
-    driverController.y().whileTrue(new RunCarriage(-speed));
+    driverController.b().whileTrue(new RunCarriage(carriage, speed));
+    driverController.y().whileTrue(new RunCarriage(carriage, -speed));
 ```
 with `driverController` replaced with your controller variable, `speed` replaced with a double from 0-1, and `.b()` or `.y()` replaced with your choice of bindings.

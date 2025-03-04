@@ -8,23 +8,23 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
 public class CarriageIOSim implements CarriageIO {
-	private DCMotorSim carriageMotorSim;
+    private DCMotorSim carriageMotorSim;
 
-	public CarriageIOSim() {
-		carriageMotorSim = new DCMotorSim(LinearSystemId.createDCMotorSystem(DCMotor.getNEO(1), 0.02, 1), DCMotor.getNEO(1));
-	}
+    public CarriageIOSim() {
+        carriageMotorSim = new DCMotorSim(LinearSystemId.createDCMotorSystem(DCMotor.getNEO(1), 0.02, 1), DCMotor.getNEO(1));
+    }
 
-	@Override
-	public void processInputs(CarriageIOInputs inputs) {
-		carriageMotorSim.update(0.02);
+    @Override
+    public void processInputs(CarriageIOInputs inputs) {
+        carriageMotorSim.update(0.02);
 
-		inputs.carriagePercent = carriageMotorSim.getAngularVelocityRadPerSec() / DCMotor.getNEO(1).freeSpeedRadPerSec;
-		inputs.carriageVoltage = Volts.of(carriageMotorSim.getInputVoltage());
-		inputs.carriageCurrent = Amps.of(carriageMotorSim.getCurrentDrawAmps());
-	}
+        inputs.carriagePercent = carriageMotorSim.getAngularVelocityRadPerSec() / DCMotor.getNEO(1).freeSpeedRadPerSec;
+        inputs.carriageVoltage = Volts.of(carriageMotorSim.getInputVoltage());
+        inputs.carriageCurrent = Amps.of(carriageMotorSim.getCurrentDrawAmps());
+    }
 
-	@Override
-	public void setCarriagePercent(double percent) {
-		carriageMotorSim.setInputVoltage(percent * RobotController.getInputVoltage());
-	}
+    @Override
+    public void setCarriagePercent(double percent) {
+        carriageMotorSim.setInputVoltage(percent * RobotController.getInputVoltage());
+    }
 }
