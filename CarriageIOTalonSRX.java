@@ -1,37 +1,36 @@
-package frc.robot.subsystems.Carriage;
+package frc.robot.subsystems.carriage;
+
+import static edu.wpi.first.units.Units.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.RobotController;
-import frc.robot.Constants;
+import com.reduxrobotics.sensors.canandcolor.Canandcolor;
 
 public class CarriageIOTalonSRX implements CarriageIO {
-    private final TalonSRX carriage = new TalonSRX(Constants.CarriageConstants.CARRIAGE_MOTOR_ID);
+    private TalonSRX carriage;
+    private Canandcolor sensor;
 
-    public CarriageIOTalonSRX() {
+    public CarriageIOTalonSRX(int motorId, int sensorId) {
+        carriage = new TalonSRX(motorId);
+        sensor = new Canandcolor(sensorId);
+
         carriage.configFactoryDefault();
-
         carriage.setInverted(true);
     }
 
     @Override
     public void processInputs(CarriageIOInputs inputs) {
+        inputs.carriagePercent = carriage.getMotorOutputPercent();
+        inputs.carriageVoltage = Volts.of(carriage.getMotorOutputVoltage());
+        inputs.carriageCurrent = Amps.of(carriage.getStatorCurrent());
+        inputs.carriageTemperature = Celsius.of(carriage.getTemperature());
 
-        inputs.carriageRPM = carriage.getSelectedSensorVelocity();
-        inputs.carriageTemp = carriage.getTemperature();
-
+        inputs.sensorProximity = sensor.getProximity();
+        inputs.sensorColor = String.format("#%s%s%s", Integer.toHexString((int) (sensor.getRed() * 255)), Integer.toHexString((int) (sensor.getGreen() * 255)), Integer.toHexString((int) (sensor.getBlue() * 255)));
     }
 
     @Override
-    public void setCarriagePercent(double maxPercent) {
-        carriage.set(ControlMode.PercentOutput, MathUtil.clamp(maxPercent / RobotController.getInputVoltage(), -1, 1));
+    public void setCarriagePercent(double percent) {
+        carriage.set(ControlMode.PercentOutput, percent);
     }
-
-    @Override
-    public void setToZero() {
-        carriage.set(ControlMode.PercentOutput, 0);
-    }
-
 }

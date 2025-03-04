@@ -1,19 +1,35 @@
-package frc.robot.subsystems.Carriage;
+package frc.robot.subsystems.carriage;
 
+import static edu.wpi.first.units.Units.*;
+
+import edu.wpi.first.units.measure.Current;
+import edu.wpi.first.units.measure.Temperature;
+import edu.wpi.first.units.measure.Voltage;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface CarriageIO {
-
     @AutoLog
     public class CarriageIOInputs {
-        public double carriageRPM = 0.0;
-        public double carriageTemp = 0.0;
+        public double carriagePercent = 0;
+        public Voltage carriageVoltage = Volts.zero();
+        public Current carriageCurrent = Amps.zero();
+        public Temperature carriageTemperature = Celsius.zero();
 
+        public double sensorProximity = 0;
+        public String sensorColor = "";
     }
 
-    public abstract void processInputs(final CarriageIOInputs inputs);
+    /**
+     * Updates the inputs object with current values.
+     * 
+     * @param inputs The inputs to update.
+     */
+    public void processInputs(CarriageIOInputs inputs);
 
-    public abstract void setCarriagePercent(double maxPercent);
-
-    public abstract void setToZero();
+    /**
+     * Sets the percent output of the carriage.
+     * 
+     * @param percent
+     */
+    public void setCarriagePercent(double percent);
 }
