@@ -26,7 +26,7 @@ public class CarriageIOTalonSRX implements CarriageIO {
         inputs.carriageTemperature = Celsius.of(carriage.getTemperature());
 
         inputs.sensorProximity = sensor.getProximity();
-        inputs.sensorColor = sensor.getColor();
+        inputs.sensorColor = String.format("#%s%s%s", Integer.toHexString((int) (sensor.getRed() * 255)), Integer.toHexString((int) (sensor.getGreen() * 255)), Integer.toHexString((int) (sensor.getBlue() * 255)));
     }
 
     @Override

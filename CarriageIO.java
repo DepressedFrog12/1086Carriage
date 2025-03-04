@@ -7,8 +7,6 @@ import edu.wpi.first.units.measure.Temperature;
 import edu.wpi.first.units.measure.Voltage;
 import org.littletonrobotics.junction.AutoLog;
 
-import com.reduxrobotics.sensors.canandcolor.ColorData;
-
 public interface CarriageIO {
     @AutoLog
     public class CarriageIOInputs {
@@ -18,7 +16,7 @@ public interface CarriageIO {
         public Temperature carriageTemperature = Celsius.zero();
 
         public double sensorProximity = 0;
-        public ColorData sensorColor = new ColorData(0,0,0);
+        public String sensorColor = "";
     }
 
     /**
