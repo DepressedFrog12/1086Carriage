@@ -14,6 +14,12 @@ public class CarriageIOSparkMax implements CarriageIO {
     private SparkMax carriage;
     private Canandcolor sensor;
 
+    /**
+     * Creates a new carriage using SparkMax motors.
+     * 
+     * @param motorId The CAN if of the SparkMax motor driving the system.
+     * @param sensorId The CAN id of the CANandColor sensor to read.
+     */
     public CarriageIOSparkMax(int motorId, int sensorId) {
         carriage = new SparkMax(motorId, SparkMax.MotorType.kBrushless);
         sensor = new Canandcolor(sensorId);
@@ -26,18 +32,18 @@ public class CarriageIOSparkMax implements CarriageIO {
     }
 
     @Override
-    public void processInputs(CarriageIOInputs inputs) {
+    public void updateInputs(CarriageIOInputs inputs) {
         inputs.carriagePercent = carriage.getAppliedOutput();
         inputs.carriageVoltage = Volts.of(carriage.getAppliedOutput() * carriage.getBusVoltage());
         inputs.carriageCurrent = Amps.of(carriage.getOutputCurrent());
         inputs.carriageTemperature = Celsius.of(carriage.getMotorTemperature());
 
         inputs.sensorProximity = sensor.getProximity();
-        inputs.sensorColor = String.format("#%s%s%s", Integer.toHexString((int) (sensor.getRed() * 255)), Integer.toHexString((int) (sensor.getGreen() * 255)), Integer.toHexString((int) (sensor.getBlue() * 255)));
+        inputs.sensorColor = String.format("#%x%x%x", (int) (sensor.getRed() * 255), (int) (sensor.getGreen() * 255), (int) (sensor.getBlue() * 255));
     }
 
     @Override
-    public void setCarriagePercent(double percent) {
+    public void setPercent(double percent) {
         carriage.set(percent);
     }
 }

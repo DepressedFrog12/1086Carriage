@@ -20,16 +20,12 @@ public interface CarriageIO {
     }
 
     /**
-     * Updates the inputs object with current values.
+     * Updates the inputs parameter with current values.
      * 
      * @param inputs The inputs to update.
      */
-    public void processInputs(CarriageIOInputs inputs);
+    public void updateInputs(CarriageIOInputs inputs);
 
-    /**
-     * Sets the percent output of the carriage.
-     * 
-     * @param percent
-     */
-    public void setCarriagePercent(double percent);
+    /** Sets the percent output of the carriage. */
+    public void setPercent(double percent);
 }

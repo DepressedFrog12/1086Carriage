@@ -10,6 +10,12 @@ public class CarriageIOTalonSRX implements CarriageIO {
     private TalonSRX carriage;
     private Canandcolor sensor;
 
+    /**
+     * Creates a new carriage using TalonSRX motors.
+     * 
+     * @param motorId The CAN if of the TalonSRX motor driving the system.
+     * @param sensorId The CAN id of the CANandColor sensor to read.
+     */
     public CarriageIOTalonSRX(int motorId, int sensorId) {
         carriage = new TalonSRX(motorId);
         sensor = new Canandcolor(sensorId);
@@ -19,18 +25,18 @@ public class CarriageIOTalonSRX implements CarriageIO {
     }
 
     @Override
-    public void processInputs(CarriageIOInputs inputs) {
+    public void updateInputs(CarriageIOInputs inputs) {
         inputs.carriagePercent = carriage.getMotorOutputPercent();
         inputs.carriageVoltage = Volts.of(carriage.getMotorOutputVoltage());
         inputs.carriageCurrent = Amps.of(carriage.getStatorCurrent());
         inputs.carriageTemperature = Celsius.of(carriage.getTemperature());
 
         inputs.sensorProximity = sensor.getProximity();
-        inputs.sensorColor = String.format("#%s%s%s", Integer.toHexString((int) (sensor.getRed() * 255)), Integer.toHexString((int) (sensor.getGreen() * 255)), Integer.toHexString((int) (sensor.getBlue() * 255)));
+        inputs.sensorColor = String.format("#%x%x%x", (int) (sensor.getRed() * 255), (int) (sensor.getGreen() * 255), (int) (sensor.getBlue() * 255));
     }
 
     @Override
-    public void setCarriagePercent(double percent) {
+    public void setPercent(double percent) {
         carriage.set(ControlMode.PercentOutput, percent);
     }
 }

@@ -10,12 +10,13 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 public class CarriageIOSim implements CarriageIO {
     private DCMotorSim carriageMotorSim;
 
+    /** Creates a simulated version of the carriage. */
     public CarriageIOSim() {
         carriageMotorSim = new DCMotorSim(LinearSystemId.createDCMotorSystem(DCMotor.getNEO(1), 0.02, 1), DCMotor.getNEO(1));
     }
 
     @Override
-    public void processInputs(CarriageIOInputs inputs) {
+    public void updateInputs(CarriageIOInputs inputs) {
         carriageMotorSim.update(0.02);
 
         inputs.carriagePercent = carriageMotorSim.getAngularVelocityRadPerSec() / DCMotor.getNEO(1).freeSpeedRadPerSec;
@@ -24,7 +25,7 @@ public class CarriageIOSim implements CarriageIO {
     }
 
     @Override
-    public void setCarriagePercent(double percent) {
+    public void setPercent(double percent) {
         carriageMotorSim.setInputVoltage(percent * RobotController.getInputVoltage());
     }
 }
